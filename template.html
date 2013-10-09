@@ -224,17 +224,28 @@ body {
           }
 
             .PostDate {
+              display: inline-block;
               float: left;
+              width: 33%;
             }
 
             .PostNotes {
-              float: right;
+              display: inline-block;
+              float: left;
+              width: 33%
             }
 
               .PostDate a,
-              .PostNotes a {
+              .PostNotes a,
+              .PostComments a, {
                 color: #9099a3;
               }
+
+            .PostComments {
+              display: inline-block;
+              float: left;
+              width: 33%
+            }
           
           .Photo, .PhotoSet {
             margin: 0 0 20px 0;
@@ -292,7 +303,7 @@ body {
   <div id="Page">
     <div id="TopStrip">
       <div id="TopContents">
-        <a href="http://peerlibrary.org">PeerLibrary</a> Open scientific knowledge
+        <a href="http://blog.peerlibrary.org">PeerLibrary</a> Open scientific knowledge
       </div>
     </div>
   </div>
@@ -302,8 +313,8 @@ body {
   <div id="Content">
       <div id="Posts">
           
-            {block:Posts}
-            <div class="Post">
+        {block:Posts}
+        <div class="Post">
            {block:Text}
               {block:Title}<h1><a href="{Permalink}">{Title}</a></h1>{/block:Title}
               {Body}
@@ -368,26 +379,32 @@ body {
           {/block:Answer}
           
           {block:Date}
- 
 
-            
+     <div class="PostDetails">
+     <ul>
+        <li class="PostDate">
+          {block:Date}<a href="{Permalink}">{ShortMonth} {DayOfMonth}{DayOfMonthSuffix} {Year}</a>
+        </li>
+
+        <li class="PostNotes">
+          {/block:Date}{block:NoteCount}<a href="{Permalink}#notes">{NoteCountWithLabel}</a>{/block:NoteCount}
+        </li>
+        <li class="PostComments">
+        {block:IfDisqusShortname}
+            <li class="comments">
+                <a href="{Permalink}#disqus_thread" title="Comments">Comments</a>
+            </li>
+        {/block:IfDisqusShortname}
+        </li>
+        </ul>
+     </div>
+
           {block:PostNotes}
              {PostNotes}
           {/block:PostNotes}
           
-          {block:Date}
- 
-
-     <div class="PostDetails">
-        <span class="PostDate">
-			{block:Date}<a href="{Permalink}">{ShortMonth} {DayOfMonth}{DayOfMonthSuffix} {Year}</a>
-        </span>
-        <span class="PostNotes">
-          {/block:Date}{block:NoteCount}<a href="{Permalink}#notes">{NoteCountWithLabel}</a>{/block:NoteCount}
-        </span>
      </div>
-     </div>
-     
+    {/block:Date}
 {/block:Posts}
 {block:IfDisqusShortname}
 
@@ -443,12 +460,7 @@ body {
      {/block:TagPage}      
 
      {block:PermalinkPagination}
-        <nav id="pageNav">
-           <ul class="clearfix">
-              {block:PreviousPost}<li><a href="{PreviousPost}" id="pageNavNewer">Previous</a></li>{/block:PreviousPost}
-              {block:NextPost}<li><a href="{NextPost}" id="pageNavOlder">Next</a></li>{/block:NextPost}  
-           </ul>
-        </nav>
+
      {/block:PermalinkPagination}
       
      {block:Pagination}
@@ -487,6 +499,19 @@ body {
      {block:IfGoogleAnalyticsID}
         <script type="text/javascript">var gaJsHost=(("https:"==document.location.protocol)?"https://ssl.":"http://www.");document.write(unescape("%3Cscript src='"+gaJsHost+"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script><script type="text/javascript">try{var pageTracker=_gat._getTracker("{text:Google Analytics ID}");pageTracker._trackPageview()}catch(err){}</script>
      {block:IfGoogleAnalyticsID}
+
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		var disqus_shortname = 'example'; // required: replace example with your forum shortname
+
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function () {
+			var s = document.createElement('script'); s.async = true;
+			s.type = 'text/javascript';
+			s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+			(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+		}());
+	</script>
 
 </body>
 </html>
