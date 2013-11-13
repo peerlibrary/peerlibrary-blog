@@ -45,10 +45,11 @@ body {
 
       #Footer {
         color: #b33727;
-        background: #2F79E7;
-        height: 80px;
+        background: #338ed5;
+        height: 40px;
         text-align: right;
-        font: 14px/80px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+        font: 14px/40px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+        margin-top:100px;
       }
 
         #Footer a.footer-home-link {
@@ -57,15 +58,19 @@ body {
         }
         
         #Footer a.presence-link {
-          color: #1A427D;
+          color: #FFF;
           font-weight: 600;
           float: right;
           margin-right: 20px;
         }
         
+        #Footer a:hover {
+        color: #1A427D;
+        }
+        
         #TopContents a {
             float: left;
-            color: #b1b8c0;
+            color: #FFFFFF;
         }
         
 
@@ -76,10 +81,10 @@ body {
         }
         
     #TopStrip {
-        color: #A4AAB0;
-        height: 38px;
+        color: #FFFFFF;
+        height: 40px;
         text-align: right;
-        font: 12px/40px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+        font: 14px/40px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
         font-weight: 600;
         border-bottom: 1px solid rgba(0,0,0,.1);
         
@@ -88,11 +93,11 @@ body {
         -ms-transition: 0.2s;
         -o-transition: 0.2s;
         transition: 0.2s;
+        background: #338ed5;
     }
     
-    #TopStrip:hover {
-        background: #4E555C;
-        color: white;
+    #TopStrip a:hover {
+        color: #1A427D;
     }
 
     #Header {
@@ -102,7 +107,7 @@ body {
       width: 50px;
       background: url('https://secure.gravatar.com/avatar/d32ca274844f5ad91365498c43546458?s=420&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-org-420.png') no-repeat 50% 50%;
       background-size: 50px 50px;
-      
+      font: 14px/80px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
       -webkit-border-radius: 6px;
       -moz-border-radius: 6px;
       -ms-border-radius: 6px;
@@ -140,10 +145,18 @@ body {
         margin: auto;
         width: 500px;
       }
-
-      .Post {
-        margin-bottom: 80px;
-        border-bottom: 4px solid #cbd0d5;
+      
+      .IndexPage .Post {
+        margin-bottom: 50px;
+        border-bottom: 1px solid #cbd0d5;
+      }
+      
+      .IndexPage #Posts .Post:last-child { 
+        border-bottom: none;
+      }
+      
+      .PostPage .Post{
+          margin-bottom: 50px;
       }
 
         .Post img {
@@ -173,7 +186,9 @@ body {
 
         .Post h2,
         .Post h2 a {
-          font: 22px/38px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+          font: 28px/40px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+          font-weight: 300;
+          text-align: center;
         }
 
         .Post h3,
@@ -218,24 +233,27 @@ body {
             .PostDate {
               display: inline-block;
               float: left;
+              text-align: left;
               width: 33%;
             }
 
             .PostNotes {
               display: inline-block;
               float: left;
+              text-align: center;
               width: 33%
             }
 
               .PostDate a,
               .PostNotes a,
-              .PostComments a, {
+              .PostComments a {
                 color: #9099a3;
               }
 
             .PostComments {
               display: inline-block;
-              float: left;
+              float: right;
+              text-align:right;
               width: 33%
             }
           
@@ -280,6 +298,20 @@ body {
         #PostNotes li {
           margin-bottom: 10px;
       }
+      
+        .notes li{
+        	font-size:12px;
+		}
+		
+		.notes{
+			
+		}
+		
+		blockquote{
+			margin-top: 0.5em;
+			margin-bottom: 0.5em;
+
+		}
 </style>
 
 <!-- Scripts -->
@@ -303,7 +335,7 @@ body {
   </div>
   <div class="Clear"></div>
   <div id="Content">
-      <div id="Posts">
+      <div id="Posts" class="{block:PermalinkPage}PostPage{/block:PermalinkPage}{block:IndexPage}IndexPage{/block:IndexPage}">
           
         {block:Posts}
         <div class="Post">
@@ -379,11 +411,15 @@ body {
         <li class="PostNotes">
           {block:NoteCount}<a href="{Permalink}#notes">{NoteCountWithLabel}</a>{/block:NoteCount}
         </li>
+        {block:IndexPage}
         {block:IfDisqusShortname}
+
           <li class="PostComments">
             <a href="{Permalink}#disqus_thread" title="Comments">Comments</a>
           </li>
+
         {/block:IfDisqusShortname}
+        {/block:IndexPage}
         </ul>
       </div>
 
@@ -392,9 +428,12 @@ body {
       {/block:PostNotes}
     </div>
 {/block:Posts}
+{block:PermalinkPage}
 {block:IfDisqusShortname}
   <div id="disqus_thread"></div>
 {/block:IfDisqusShortname}
+{/block:PermalinkPage}
+
       </div>
   </div>
 
