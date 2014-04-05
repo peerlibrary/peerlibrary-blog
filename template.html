@@ -65,12 +65,12 @@ body {
         }
         
         #Footer a:hover {
-        color: #1A427D;
+          color: #1A427D;
         }
         
         #TopContents a {
-            float: left;
-            color: #FFFFFF;
+          float: left;
+          color: #FFFFFF;
         }
         
 
@@ -155,8 +155,17 @@ body {
         border-bottom: none;
       }
       
-      .PostPage .Post{
-          margin-bottom: 50px;
+      .IndexPage .source-short .read_more_container, .PostPage .read_more_container {
+        display: none;
+      }
+      
+      .IndexPage .quote-long, .IndexPage .quote-middle {
+        max-height: 196px;
+        overflow-y: hidden;
+      }
+      
+      .PostPage .Post {
+        margin-bottom: 50px;
       }
 
         .Post img {
@@ -301,20 +310,23 @@ body {
 
         #PostNotes li {
           margin-bottom: 10px;
-      }
+        }
       
-        .notes li{
-        	font-size:12px;
+        .notes li {
+          font-size:12px;
 		}
 		
-		.notes{
-			
+		.notes .avatar_frame {
+		  margin-right: 5px;
 		}
 		
-		blockquote{
-			margin-top: 0.5em;
-			margin-bottom: 0.5em;
-
+		.notes .avatar {
+		  vertical-align: middle;
+		}
+		
+		blockquote {
+		  margin-top: 0.5em;
+		  margin-bottom: 0.5em;
 		}
 </style>
 
@@ -359,8 +371,8 @@ body {
            {/block:Photoset}
           
            {block:Quote}
-              <div id="quoteText">{Quote}</div>
-              {block:Source}<div id="quoteSource"><p>&mdash;{Source}</p></div>{/block:Source}
+              <div id="quoteText" class="quote-{Length}">{Quote}</div>
+              {block:Source}<div id="quoteSource" class="source-{Length}"><p>&mdash;{Source}</p><p class="read_more_container"><a class="read_more" href="{Permalink}">Read More</a></p></div>{/block:Source}
            {/block:Quote}
 
            {block:Link}
